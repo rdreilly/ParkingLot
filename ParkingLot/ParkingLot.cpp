@@ -48,6 +48,12 @@ Vehicle ParkingSlot::unreserve()
 	reserved = false;
 	return vehicle;
 }
+
+vehicle_type_t ParkingSlot::get_supported_vehicle_type()
+{
+	return supported_vehicle;
+}
+
 ParkingLot::ParkingLot(int reg, int hand, int elec, int compact)
 {
 	int slotId = 0;
@@ -60,6 +66,13 @@ ParkingLot::ParkingLot(int reg, int hand, int elec, int compact)
 	for (int i = 0; i < compact; i++)
 		addParkingSlot(++slotId, COMPACT);
 	empty_slots = parkingSlots.size();
+}
+
+void ParkingLot::addParkingSlot(int id, vehicle_type_t vehicle_type)
+{
+	ParkingSlot newSlot = ParkingSlot(id, vehicle_type);
+//	parkingSlots[id] = newSlot;
+
 }
 
 

@@ -15,10 +15,5 @@ namespace ParkingLotUnitTest1
 			Assert::AreEqual(2, ParkingLot::getTwo());
 		}
 
-		TEST_METHOD(TestMethodGetN)
-		{
-			ParkingLot pl = ParkingLot();
-			Assert::AreNotEqual(0, pl.getN());
-		}
 	};
 }
