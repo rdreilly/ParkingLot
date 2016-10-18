@@ -16,7 +16,7 @@ public:
 	Vehicle(vehicle_type_t Vehicle);
 };
 
-class ParkingSlot
+class ParkingSpace
 {
 
 	bool reserved = false;
@@ -26,26 +26,21 @@ class ParkingSlot
 public:
 	int id;
 	vehicle_type_t get_supported_vehicle_type();
-	ParkingSlot(int id, vehicle_type_t supported_vehicle);
+	ParkingSpace(int id, vehicle_type_t supported_vehicle);
 	bool isReserved();
 	int reserve(Vehicle vehicle);
 	Vehicle unreserve();
-	bool operator <(const ParkingSlot& rhs) const
+	bool operator <(const ParkingSpace& rhs) const
 	{
 		return id < rhs.id;
 	}
-
 };
 
 class ParkingLot
 {
-
-	int n = 10;
-	map <int, ParkingSlot> parkingSlots;
+	map <int, ParkingSpace> parkingSpaces;
 public:
 	int empty_slots;
-	static int getTwo();
-	int getN() const;
 	ParkingLot(int regSlots, int handSlots, int elecSlots, int compSlots);
-	void addParkingSlot(int id, vehicle_type_t vehicle_type);
+	void addParkingSpace(int id, vehicle_type_t vehicle_type);
 };

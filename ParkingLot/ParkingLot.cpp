@@ -8,15 +8,6 @@ int main()
 	return 0;
 }
 
-int ParkingLot::getTwo()
-{
-	return 2;
-}
-
-int ParkingLot::getN() const
-{
-	return n;
-}
 
 vehicle_type_t Vehicle::getVehicleType()
 {
@@ -26,16 +17,16 @@ Vehicle::Vehicle(vehicle_type_t Vehicle)
 {
 	vehicle_type = Vehicle;
 }
-ParkingSlot::ParkingSlot(int id, vehicle_type_t supported_vehicle )
+ParkingSpace::ParkingSpace(int id, vehicle_type_t supported_vehicle )
 {	
 	id = id;
 	supported_vehicle = supported_vehicle;
 }
-bool ParkingSlot::isReserved()
+bool ParkingSpace::isReserved()
 {
 	return reserved;
 }
-int ParkingSlot::reserve(Vehicle vehicle)
+int ParkingSpace::reserve(Vehicle vehicle)
 {
 	if (vehicle.getVehicleType() != supported_vehicle)
 		throw SLOT_ERR;
@@ -43,13 +34,13 @@ int ParkingSlot::reserve(Vehicle vehicle)
 	vehicle = vehicle;
 	return id;
 }
-Vehicle ParkingSlot::unreserve()
+Vehicle ParkingSpace::unreserve()
 {
 	reserved = false;
 	return vehicle;
 }
 
-vehicle_type_t ParkingSlot::get_supported_vehicle_type()
+vehicle_type_t ParkingSpace::get_supported_vehicle_type()
 {
 	return supported_vehicle;
 }
@@ -58,21 +49,20 @@ ParkingLot::ParkingLot(int reg, int hand, int elec, int compact)
 {
 	int slotId = 0;
 	for (int i = 0; i < reg; i++)
-		addParkingSlot(++slotId, REG);
+		addParkingSpace(++slotId, REG);
 	for (int i = 0; i < hand; i++)
-		addParkingSlot(++slotId, HANDICAPPED);
+		addParkingSpace(++slotId, HANDICAPPED);
 	for (int i = 0; i < elec; i++)
-		addParkingSlot(++slotId, ELEC);
+		addParkingSpace(++slotId, ELEC);
 	for (int i = 0; i < compact; i++)
-		addParkingSlot(++slotId, COMPACT);
-	empty_slots = parkingSlots.size();
+		addParkingSpace(++slotId, COMPACT);
+	empty_slots = parkingSpaces.size();
 }
 
-void ParkingLot::addParkingSlot(int id, vehicle_type_t vehicle_type)
+void ParkingLot::addParkingSpace(int id, vehicle_type_t vehicle_type)
 {
-	ParkingSlot newSlot = ParkingSlot(id, vehicle_type);
-//	parkingSlots[id] = newSlot;
-
+	ParkingSpace newSpace = ParkingSpace(id, vehicle_type);
+	parkingSpaces.insert(std::pair<int, ParkingSpace>(id, newSpace));
 }
 
 

@@ -10,9 +10,10 @@ namespace ParkingLotUnitTest1
 	{
 	public:
 
-		TEST_METHOD(TestMethodGetTwo)
+		TEST_METHOD(TestMethodGetSize)
 		{
-			Assert::AreEqual(2, ParkingLot::getTwo());
+			ParkingLot pl = ParkingLot(1,1,1,1);
+			Assert::AreEqual(4, pl.empty_slots);
 		}
 
 	};
